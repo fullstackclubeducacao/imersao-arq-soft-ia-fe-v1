@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/unbounded";
+@import "@fontsource-variable/hanken-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+@theme inline {
+    --font-heading: 'Unbounded Variable', sans-serif;
+    --font-sans: 'Hanken Grotesk Variable', sans-serif;
+    --font-mono: 'JetBrains Mono Variable', monospace;
+    --color-tape: var(--tape);
+    --color-tape-foreground: var(--tape-foreground);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    /* Paleta: névoa #EEF1F6 · tinta #14213D · cobalto #2743D6 · fita #F5C518 · ardósia #5B6478 · linha #CDD4E1 */
+    --background: #eef1f6;
+    --foreground: #14213d;
+    --card: #fbfcfe;
+    --card-foreground: #14213d;
+    --popover: #fbfcfe;
+    --popover-foreground: #14213d;
+    --primary: #14213d;
+    --primary-foreground: #f5f7fb;
+    --secondary: #e1e6ef;
+    --secondary-foreground: #14213d;
+    --muted: #e4e8f0;
+    --muted-foreground: #5b6478;
+    --accent: #e1e6ef;
+    --accent-foreground: #14213d;
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: #cdd4e1;
+    --input: #bfc8d8;
+    --ring: #2743d6;
+    --tape: #f5c518;
+    --tape-foreground: #14213d;
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: #fbfcfe;
+    --sidebar-foreground: #14213d;
+    --sidebar-primary: #14213d;
+    --sidebar-primary-foreground: #f5f7fb;
+    --sidebar-accent: #e1e6ef;
+    --sidebar-accent-foreground: #14213d;
+    --sidebar-border: #cdd4e1;
+    --sidebar-ring: #2743d6;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0e1528;
+        --foreground: #e8ecf5;
+        --card: #16203a;
+        --card-foreground: #e8ecf5;
+        --popover: #16203a;
+        --popover-foreground: #e8ecf5;
+        --primary: #e8ecf5;
+        --primary-foreground: #0e1528;
+        --secondary: #1d2945;
+        --secondary-foreground: #e8ecf5;
+        --muted: #1d2945;
+        --muted-foreground: #97a1b8;
+        --accent: #1d2945;
+        --accent-foreground: #e8ecf5;
+        --destructive: oklch(0.704 0.191 22.216);
+        --border: #27345a;
+        --input: #32406a;
+        --ring: #6f86ff;
+        --tape: #f2c230;
+        --tape-foreground: #0e1528;
+        --sidebar: #16203a;
+        --sidebar-foreground: #e8ecf5;
+        --sidebar-primary: #e8ecf5;
+        --sidebar-primary-foreground: #0e1528;
+        --sidebar-accent: #1d2945;
+        --sidebar-accent-foreground: #e8ecf5;
+        --sidebar-border: #27345a;
+        --sidebar-ring: #6f86ff;
+    }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+    }
+  html {
+    @apply font-sans;
+    }
+}
+@layer components {
+  /* Marcações da fita métrica: traço longo a cada --major, curto a cada --minor. */
+  .tape-ticks {
+    --tick: color-mix(in oklab, var(--foreground) 45%, transparent);
+    background-image:
+      repeating-linear-gradient(to right, var(--tick) 0 1px, transparent 1px var(--major)),
+      repeating-linear-gradient(to right, var(--tick) 0 1px, transparent 1px var(--minor));
+    background-size: 100% 55%, 100% 28%;
+    background-repeat: no-repeat;
+    background-position: top left;
+  }
+}
